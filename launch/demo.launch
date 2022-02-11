@@ -1,5 +1,5 @@
 <launch>
-    <arg name="product_id" default="drivebay2" />
+    <arg name="product_id" default="trakstar" />
     <arg name="base_frame_id" default="ascension_origin" />
     <arg name="root_frame_id" default="ascension_origin" />
 

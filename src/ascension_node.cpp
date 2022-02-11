@@ -12,6 +12,8 @@ double deg2rad (double degrees) {
     return degrees * 4.0 * atan (1.0) / 180.0;
 }
 
+#define ASCENSION_VENDOR_ID 0x04b4
+
 int main(int argc, char **argv)
 {    
     ros::init(argc, argv, "ascension_node");
@@ -45,7 +47,7 @@ int main(int argc, char **argv)
     
     // configure ATC3DG
     
-    PointATC3DG bird(product);
+    PointATC3DG bird(product, ASCENSION_VENDOR_ID);
     if (!bird) return -1;
     bird.setSuddenOutputChangeLock(0);
     
