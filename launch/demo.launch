@@ -9,5 +9,6 @@
         <arg name="root_frame_id" value="$(arg root_frame_id)" />
     </include>
     
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ascension)/launch/demo.rviz" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ascension)/rviz/trakSTAR.rviz" />
+    <!-- <node name="rviz" pkg="rviz" type="rviz" /> -->
 </launch>

@@ -46,4 +46,9 @@ Launch the demo of visualing the sensor pose in Rviz by:
 roslaunch ascension demo.launch
 ```
 
+Launch the visualization of the sensor pose with respect to the snake robot in Rviz by: 
+```bash
+roslaunch ascension transform.launch
+```
+
 <!-- Or, start the system only and open with it with ImFusion (or any other preferred software). -->

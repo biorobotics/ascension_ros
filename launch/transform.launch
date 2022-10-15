@@ -1,0 +1,34 @@
+<launch>
+    <arg name="product_id" default="trakstar" />
+    <arg name="base_frame_id" default="ascension_origin" />
+    <arg name="root_frame_id" default="ascension_origin" />
+    <arg name="model" default="$(find ascension)/medsnake.xacro"/>
+
+    <include file="$(find ascension)/launch/start.launch">
+        <arg name="product_id" value="$(arg product_id)" />
+        <arg name="base_frame_id" value="$(arg base_frame_id)" />
+        <arg name="root_frame_id" value="$(arg root_frame_id)" />
+    </include>
+
+       
+    <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ascension)/launch/trakSTAR.rviz" /> -->
+    <!-- <node name="rviz" pkg="rviz" type="rviz" /> -->
+    <node name="ascension_transform" pkg="ascension" type="ascension_transform" output="screen">
+        <param name="product_id" value="$(arg product_id)"/>
+        <param name="base_frame_id" value="$(arg base_frame_id)"/>
+        <param name="root_frame_id" value="$(arg root_frame_id)"/>
+        <rosparam command="load" file="$(find ascension)/config/snake_to_EM.yaml" />  
+    </node>
+
+    <node name="ascension_listener" pkg="ascension" type="ascension_listener" output="screen">
+        <param name="product_id" value="$(arg product_id)"/>
+        <param name="base_frame_id" value="$(arg base_frame_id)"/>
+        <param name="root_frame_id" value="$(arg root_frame_id)"/>
+        <rosparam param="target_frame_ids">["target1", "target2"]</rosparam>
+        <rosparam param="num_sensor">1</rosparam>
+    </node>
+    <include file="$(find medsnake_sim)/launch/display.launch"/>
+    <!-- <param name="robot_description" command="$(find xacro)/xacro $(arg model)" /> 
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ascension)/rviz/transform.rviz" /> --> -->
+    <!-- <node name="rviz" pkg="rviz" type="rviz" /> -->
+</launch>

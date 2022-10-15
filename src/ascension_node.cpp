@@ -52,6 +52,7 @@ int main(int argc, char **argv)
     bird.setSuddenOutputChangeLock(0);
     
     int sensors_number = bird.getNumberOfSensors();
+    // nh.setParam("/num_sensor", sensors_number);
     ROS_INFO_STREAM("Detected " << sensors_number << " sensors");
     
     for (int i = 0; i < sensors_number; i++)
