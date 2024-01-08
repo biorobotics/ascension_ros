@@ -8,6 +8,7 @@
 ros::Publisher marker_pub;
 std::vector<std::vector<geometry_msgs::Point>> pointsArray; // Global Array of Subarray
 int sensors_number; // Global Variable of Number of Sensors
+int max_points = 7200;
 
 
 void clearCallBack(const std_msgs::String::ConstPtr& msg)
@@ -33,6 +34,9 @@ void sensorCallback(const ascension::Sensor_poses::ConstPtr& my_msg)
 
     // Add the point to the vector of points
     pointsArray[i].push_back(point);
+    while (pointsArray[i].size() > max_points) {
+      pointsArray[i].erase(pointsArray[i].begin());
+    }
 
     // Create a unique namespace for each marker
     std::string marker_namespace = "sensor_" + std::to_string(i);
