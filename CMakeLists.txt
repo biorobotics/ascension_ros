@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(ascension)
 
-find_package(catkin REQUIRED  COMPONENTS roscpp tf geometry_msgs message_generation)
+find_package(catkin REQUIRED  COMPONENTS roscpp tf geometry_msgs message_generation visualization_msgs)
 
 add_message_files(
   FILES
@@ -34,7 +34,7 @@ set(ATC3DG_LIBRARY_DIRS ${binary_dir})
 set(ATC3DG_LIBRARY "${ATC3DG_LIBRARY_DIRS}/libatclib.so")
 
 catkin_package(
-    CATKIN_DEPENDS roscpp tf geometry_msgs message_runtime
+    CATKIN_DEPENDS roscpp tf geometry_msgs message_runtime visualization_msgs
 )
 
 ###########
@@ -46,6 +46,7 @@ include_directories(${ATC3DG_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME}_publisher src/ascension_node.cpp)
 add_executable(${PROJECT_NAME}_transform src/transform_node.cpp)
 add_executable(${PROJECT_NAME}_listener src/listener_node.cpp)
+add_executable(${PROJECT_NAME}_sensor_listener src/sensor_poses_listener.cpp)
 
 target_link_libraries(${PROJECT_NAME}_publisher
   ${catkin_LIBRARIES}
@@ -59,10 +60,15 @@ target_link_libraries(${PROJECT_NAME}_listener
  ${catkin_LIBRARIES}
  )
 
+ target_link_libraries(${PROJECT_NAME}_sensor_listener
+ ${catkin_LIBRARIES}
+ )
+
+
 add_dependencies(${PROJECT_NAME}_publisher act3dg)
 add_dependencies(${PROJECT_NAME}_transform act3dg)
 add_dependencies(${PROJECT_NAME}_listener act3dg)
-
+add_dependencies(${PROJECT_NAME}_sensor_listener act3dg)
 
 #############
 ## Install ##

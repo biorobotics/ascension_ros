@@ -33,10 +33,12 @@ int main(int argc, char** argv) {
     while (node.ok()){
         ascension::Sensor_poses my_msg;
         for(int i = 0; i < sensors_number; i++) {
-            
+
+            //ROS_INFO("My sensor amount is: %d", sensors_number);
+
 	        tf::StampedTransform transform;
             try{
-                listener.lookupTransform(target_frame_ids[i], "/snake", 
+                listener.lookupTransform("/snake", target_frame_ids[i],
                                         ros::Time(0), transform);
             }
             catch (tf::TransformException ex){

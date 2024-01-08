@@ -25,10 +25,11 @@
         <param name="base_frame_id" value="$(arg base_frame_id)"/>
         <param name="root_frame_id" value="$(arg root_frame_id)"/>
         <rosparam param="target_frame_ids">["target1", "target2"]</rosparam>
-        <rosparam param="num_sensor">1</rosparam>
+        <rosparam param="num_sensor">2</rosparam>
     </node>
-    <include file="$(find medsnake_sim)/launch/display.launch"/>
-    <!-- <param name="robot_description" command="$(find xacro)/xacro $(arg model)" /> 
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ascension)/rviz/transform.rviz" /> --> -->
-    <!-- <node name="rviz" pkg="rviz" type="rviz" /> -->
+
+    <node name="sensor_poses_listener" pkg="ascension" type="ascension_sensor_listener" output="screen">
+    </node>
+
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
 </launch>
